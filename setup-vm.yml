@@ -5,7 +5,8 @@ inputs:
   - name: getip
   - name: azure-linux-auto
 
-run: getip/bin/setup-vm.sh
+run:
+  path: getip/bin/setup-vm.sh
 
 params:
   HOST:     ""
