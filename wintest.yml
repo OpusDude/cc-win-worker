@@ -1,14 +1,17 @@
 ---
 name: wintest
 
-# replace with `bosh status --uuid`
-director_uuid: a90e23d2-99b4-490d-9f17-64ab630d6999
-
 resources:
   - name: getip
     type: git
-    source: 
+    source:
       uri: https://github.com/OpusDude/cc-win-worker
+      branch: master
+
+  - name: azure-linux-auto
+    type: git
+    source:
+      uri: https://github.com/iamshital/azure-linux-automation
       branch: master
 
 jobs:
@@ -17,6 +20,15 @@ jobs:
       - aggregate:
         - get: getip
           trigger: true
-      - task: execute
+        - get: azure-linux-auto
+          trigger: true
+      - task: cc-win
         privileged: true
         file: getip/cc-win.yml
+      - do:
+        - task: setup-vm
+          file: getip/setup-vm.yml
+          params:
+            HOST: <your host name or ip>
+            USERNAME: <username>
+            PASSWORD: <password>

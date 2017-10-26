@@ -1,0 +1,13 @@
+---
+platform: linux
+
+inputs:
+  - name: getip
+  - name: azure-linux-auto
+
+run: getip/bin/setup-vm.sh
+
+params:
+  HOST:     ""
+  USERNAME: ""
+  PASSWORD: ""
