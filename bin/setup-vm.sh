@@ -8,5 +8,5 @@ set -e
 
 apt-get install -y sshpass
 
-sshpass -p ${PASSWORD} scp -r $PWD/azure-linux-auto ${USERNAME}@${HOST}:/tmp
-sshpass -p ${PASSWORD} ssh  ${USERNAME}@${HOST} ls -al
+sshpass -p ${PASSWORD} scp -o StrictHostKeyChecking=no -r $PWD/azure-linux-auto ${USERNAME}@${HOST}:/tmp
+sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no ${USERNAME}@${HOST} ls -al
